@@ -8,7 +8,7 @@
 ' Evolutions: http://www.wickham43.net/hoverpopups.php
 '
 ' Author: Michel DESSAINTES
-' Last modification: 2024-04-08
+' Last modification: 2024-04-13
 
 Option Explicit
 Dim oArgs, oFso, oReader, oWriter, fileText, fileName, Regex
@@ -29,14 +29,10 @@ If oArgs.Count >= 1 Then
 			"<html>" & _
 			"<head>" & _
 			"<style>" & _
-			"	.stamp {" & _
-			"		background-color: Aqua;" & _
-			"		color: blue;" & _
-			"	}" & _
-			"	.author {" & _
-			"		background-color: Silver;" & _
-			"		color: blue;" & _
-			"	}" & _
+			"	.stamp  { background-color: Aqua;   color: blue; }" & _
+			"	.author { background-color: Silver; color: blue; }" & _
+			"	.small { width: 100px; }" & _
+			"	.big   { width: 400px; }" & _
 			"	#popup a, #popup a:visited {" & _
 			"		position: relative;" & _
 			"		vertical-align: top;" & _
@@ -61,7 +57,7 @@ If oArgs.Count >= 1 Then
 		Regex.Ignorecase = True
 
 		'Regex.Pattern : "\u200E" does not work!?
-		Regex.Pattern = " ...([^ ]*?(jpg|jpeg|png|gif)) \(fichier joint\)":	fileText = Regex.Replace(fileText, " <a href=""$1""><img src=""$1"" width=""100px""><span><img src=""$1"" width=""400px""></span></a> ")	' Image
+		Regex.Pattern = " ...([^ ]*?(jpg|jpeg|png|gif)) \(fichier joint\)":	fileText = Regex.Replace(fileText, " <a href=""$1""><img class=small src=""$1""><span><img class=big src=""$1""></span></a> ")	' Image
 		Regex.Pattern = " ...([^ ]*?) \(fichier joint\)":	fileText = Regex.Replace(fileText, " <a href=""$1"">$1</a> ")	' Other attachement
 		Regex.Pattern = "(https?.*?)( |\n)":				fileText = Regex.Replace(fileText, "<a href=""$1"">$1</a>$2")	' Url
 		Regex.Pattern = "\n([0-9/, :]*?) - (.*?):":			fileText = Regex.Replace(fileText, "<br><span class=stamp>$1</span> - <span class=author>$2</span> :")
