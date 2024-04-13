@@ -58,15 +58,15 @@ If oArgs.Count >= 1 Then
 
 		'Regex.Pattern : "\u200E" does not work!?
 		Regex.Pattern = " ...([^ ]*?(jpg|jpeg|png|gif)) \(fichier joint\)":	fileText = Regex.Replace(fileText, " <a href=""$1""><img class=small src=""$1""><span><img class=big src=""$1""></span></a> ")	' Image
-		Regex.Pattern = " ...([^ ]*?) \(fichier joint\)":	fileText = Regex.Replace(fileText, " <a href=""$1"">$1</a> ")	' Other attachement
-		Regex.Pattern = "(https?.*?)( |\n)":				fileText = Regex.Replace(fileText, "<a href=""$1"">$1</a>$2")	' Url
-		Regex.Pattern = "\n([0-9/, :]*?) - (.*?):":			fileText = Regex.Replace(fileText, "<br><span class=stamp>$1</span> - <span class=author>$2</span> :")
-		Regex.Pattern = "_(.*?)_":							fileText = Regex.Replace(fileText, "<i>$1</i>")					' Italic
-		Regex.Pattern = "~(.*?)~":							fileText = Regex.Replace(fileText, "<strike>$1</strike>")		' Barré
-		Regex.Pattern = "```(.*?)```":						fileText = Regex.Replace(fileText, "<tt>$1</tt>")				' Fonte fixe
-		Regex.Pattern = "\*(.*?)\*":						fileText = Regex.Replace(fileText, "<b>$1</b>")					' Gras
-		' À placer après les Replaces ci-dessus
-		Regex.Pattern = "\n":								fileText = Regex.Replace(fileText, "<br>")						' Saut de lignes
+        Regex.Pattern = " ...([^ ]*?) \(fichier joint\)":   fileText = Regex.Replace(fileText, " <a href=""$1"">$1</a> ")   ' Other attachement
+        Regex.Pattern = "(https?.*?)( |\n)":                fileText = Regex.Replace(fileText, "<a href=""$1"">$1</a>$2")   ' Url
+        Regex.Pattern = "\n([0-9/, :]*?) - (.*?):":         fileText = Regex.Replace(fileText, "<br><span class=stamp>$1</span> - <span class=author>$2</span> :")
+        Regex.Pattern = "_(.*?)_":                          fileText = Regex.Replace(fileText, "<i>$1</i>")                 ' Italic
+        Regex.Pattern = "~(.*?)~":                          fileText = Regex.Replace(fileText, "<strike>$1</strike>")       ' Barré
+        Regex.Pattern = "```(.*?)```":                      fileText = Regex.Replace(fileText, "<tt>$1</tt>")               ' Fonte fixe
+        Regex.Pattern = "\*(.*?)\*":                        fileText = Regex.Replace(fileText, "<b>$1</b>")                 ' Gras
+        ' À placer après les Replaces ci-dessus
+        Regex.Pattern = "\n":                               fileText = Regex.Replace(fileText, "<br>")                      ' Saut de lignes
 			
 		oWriter.Write(fileText)
 		oWriter.Write("</div></body></html>")
